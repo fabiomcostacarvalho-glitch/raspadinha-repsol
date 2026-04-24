@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspadinha Especial</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background-color: #f4f4f4; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 100px); gap: 10px; justify-content: center; margin-top: 20px; }
+        .cell { 
+            width: 100px; height: 100px; background-color: #ccc; 
+            display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; font-size: 24px; font-weight: bold; border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .revealed { background-color: white; border: 2px solid #ff5d00; }
+        .logo { width: 60px; display: none; }
+        .revealed .logo { display: block; }
+        #message { margin-top: 30px; font-weight: bold; color: #e6332a; display: none; padding: 20px; border: 2px dashed #333; }
+    </style>
+</head>
+<body>
+
+    <h1>Tenta a tua sorte! 🍀</h1>
+    <p>Escolhe 3 números para raspar:</p>
+
+    <div class="grid" id="grid">
+        <div class="cell" onclick="reveal(this)">1<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)">2<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)">3<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)">4<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)">5<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)">6<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)">7<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)">8<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)">9<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+    </div>
+
+    <div id="message">
+        <h2>🎉 PARABÉNS! 🎉</h2>
+        <p>Acabaste de ganhar a obrigatoriedade de fazer um contrato Repsol hoje!</p>
+        <button onclick="window.location.reload()">Tentar novamente</button>
+    </div>
+
+    <script>
+        let count = 0;
+        function reveal(element) {
+            if (!element.classList.contains('revealed') && count < 3) {
+                element.classList.add('revealed');
+                element.innerText = ''; // Remove o número
+                element.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" style="width:60px">';
+                count++;
+
+                if (count === 3) {
+                    setTimeout(() => {
+                        document.getElementById('message').style.display = 'block';
+                        document.getElementById('grid').style.pointerEvents = 'none'; // Bloqueia mais cliques
+                    }, 500);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
