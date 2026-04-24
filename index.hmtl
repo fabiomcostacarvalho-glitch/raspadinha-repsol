@@ -5,41 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raspadinha Especial</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background-color: #f4f4f4; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(3, 100px); gap: 10px; justify-content: center; margin-top: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #fdfdfd; padding: 20px; color: #333; }
+        h1 { color: #ff5d00; }
+        .grid { display: grid; grid-template-columns: repeat(3, 100px); gap: 15px; justify-content: center; margin: 30px auto; max-width: 350px; }
         .cell { 
-            width: 100px; height: 100px; background-color: #ccc; 
+            width: 100px; height: 100px; background-color: #bdc3c7; 
             display: flex; align-items: center; justify-content: center; 
-            cursor: pointer; font-size: 24px; font-weight: bold; border-radius: 8px;
-            transition: background 0.3s;
+            cursor: pointer; font-size: 28px; font-weight: bold; border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.2s; position: relative; overflow: hidden;
         }
-        .revealed { background-color: white; border: 2px solid #ff5d00; }
-        .logo { width: 60px; display: none; }
+        .cell:hover { background-color: #aab2b7; transform: scale(1.05); }
+        .revealed { background-color: #fff; border: 2px solid #ff5d00; transform: scale(1) !important; box-shadow: none; }
+        .logo { width: 80%; height: auto; display: none; pointer-events: none; }
         .revealed .logo { display: block; }
-        #message { margin-top: 30px; font-weight: bold; color: #e6332a; display: none; padding: 20px; border: 2px dashed #333; }
+        .revealed .num { display: none; }
+        
+        #message { 
+            margin: 30px auto; max-width: 500px; display: none; 
+            padding: 25px; border: 3px solid #ff5d00; border-radius: 20px;
+            background-color: #fff2e6; animation: pop 0.5s ease;
+        }
+        @keyframes pop { 0% { transform: scale(0.8); } 100% { transform: scale(1); } }
+        button { background: #ff5d00; color: white; border: none; padding: 12px 25px; border-radius: 25px; font-weight: bold; cursor: pointer; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <h1>Tenta a tua sorte! 🍀</h1>
-    <p>Escolhe 3 números para raspar:</p>
+    <p>Escolhe <b>3 números</b> para raspar e ganhar o teu prémio:</p>
 
     <div class="grid" id="grid">
-        <div class="cell" onclick="reveal(this)">1<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
-        <div class="cell" onclick="reveal(this)">2<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
-        <div class="cell" onclick="reveal(this)">3<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
-        <div class="cell" onclick="reveal(this)">4<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
-        <div class="cell" onclick="reveal(this)">5<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
-        <div class="cell" onclick="reveal(this)">6<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
-        <div class="cell" onclick="reveal(this)">7<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
-        <div class="cell" onclick="reveal(this)">8<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
-        <div class="cell" onclick="reveal(this)">9<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)"><span class="num">1</span><img src="https://logodownload.org/wp-content/uploads/2014/09/repsol-logo-0.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)"><span class="num">2</span><img src="https://logodownload.org/wp-content/uploads/2014/09/repsol-logo-0.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)"><span class="num">3</span><img src="https://logodownload.org/wp-content/uploads/2014/09/repsol-logo-0.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)"><span class="num">4</span><img src="https://logodownload.org/wp-content/uploads/2014/09/repsol-logo-0.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)"><span class="num">5</span><img src="https://logodownload.org/wp-content/uploads/2014/09/repsol-logo-0.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)"><span class="num">6</span><img src="https://logodownload.org/wp-content/uploads/2014/09/repsol-logo-0.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)"><span class="num">7</span><img src="https://logodownload.org/wp-content/uploads/2014/09/repsol-logo-0.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)"><span class="num">8</span><img src="https://logodownload.org/wp-content/uploads/2014/09/repsol-logo-0.png" class="logo"></div>
+        <div class="cell" onclick="reveal(this)"><span class="num">9</span><img src="https://logodownload.org/wp-content/uploads/2014/09/repsol-logo-0.png" class="logo"></div>
     </div>
 
     <div id="message">
-        <h2>🎉 PARABÉNS! 🎉</h2>
-        <p>Acabaste de ganhar a obrigatoriedade de fazer um contrato Repsol hoje!</p>
-        <button onclick="window.location.reload()">Tentar novamente</button>
+        <h2 style="margin-top:0;">🎉 PARABÉNS! 🎉</h2>
+        <p style="font-size: 1.2em;">Acabaste de ganhar a obrigatoriedade de fazer um contrato <b>Repsol</b> hoje!</p>
+        <button onclick="window.location.reload()">Aceitar Prémio</button>
     </div>
 
     <script>
@@ -47,15 +58,13 @@
         function reveal(element) {
             if (!element.classList.contains('revealed') && count < 3) {
                 element.classList.add('revealed');
-                element.innerText = ''; // Remove o número
-                element.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Repsol_logo.svg/1200px-Repsol_logo.svg.png" style="width:60px">';
                 count++;
 
                 if (count === 3) {
                     setTimeout(() => {
                         document.getElementById('message').style.display = 'block';
-                        document.getElementById('grid').style.pointerEvents = 'none'; // Bloqueia mais cliques
-                    }, 500);
+                        document.getElementById('grid').style.pointerEvents = 'none'; 
+                    }, 600);
                 }
             }
         }
